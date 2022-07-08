@@ -34,12 +34,14 @@ urlpatterns = [
     path('signup/student/', StudentSignUpView.as_view()),
     path('api/profile/', views.profile.as_view(),name='profile'),
     path('api/update_profile/', views.UpdateProfile.as_view(), name='profile_update'),
-    path('staff/create_categories/',views.categoryCreation, name="category"),
+    path('staff/create_categories/',views.categoryCreation.as_view(), name="category"),
     path('staff/post/', views.PostList.as_view(), name='staffpostendpoint'),
     path('staff/post/<int:pk>/', views.SinglePostList.as_view(), name='singlepost'),
     path('staff/post/<int:pk>/comment/', views.PostComment.as_view(), name='comment'),
     path('staff/post/comment/<int:pk>/comment/', views.PostChildComment.as_view(), name='comment'),
     path('posts/<int:pk>/like/',views.LikesView.as_view(),name = 'post_likes'),
+    
+    
     #student urls
     path('student/update_profile/', views.UpdateProfile.as_view(), name='student_profile_update'),
     path('student/', views.StudentList.as_view(), name='studentslistendpoint'),
@@ -62,6 +64,7 @@ urlpatterns = [
     path('admin/deactivate/', views.DeactivateUser.as_view(), name='deactivate'),
     
     #General apiendpoints
+    
     path('all_users/', views.RegisteredUsers.as_view(), name='all_users'),
     path('all_comments/', views.commentsList.as_view(), name='comments'),
     path('all_likes/', views.LikesList.as_view(), name='likes'),
