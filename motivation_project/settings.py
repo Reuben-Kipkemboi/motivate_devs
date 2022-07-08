@@ -51,11 +51,11 @@ INSTALLED_APPS = [
     'drf_yasg',
     'motivation_app',
     'cloudinary_storage',
+    'corsheaders',
     'cloudinary',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
-    'corsheaders',
     
 ]
 
@@ -182,17 +182,15 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'motivation_app.User'
 ACCOUNT_EMAIL_UNIQUE=True
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:4200',
-#     'https://polite-fairy-12efa3.netlify.app'
-#     'https://josephatngugi.github.io/Motivation-App-Frontend',
-# ]
 
-CORS_ALLOW_ALL_ORIGINS = (
-    True  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-)
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200", # Angular server in development
+    "https://josephatngugi.github.io/Motivation-App-Frontend",# where you've hosted your angular application
+]
+
+
 
 
