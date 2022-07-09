@@ -188,7 +188,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200", # Angular server in development
-    "https://josephatngugi.github.io/Motivation-App-Frontend",# where you've hosted your angular application
+    # "https://josephatngugi.github.io/Motivation-App-Frontend",# where you've hosted your angular application
 ]
 
 

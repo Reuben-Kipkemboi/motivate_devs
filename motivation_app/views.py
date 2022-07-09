@@ -48,17 +48,24 @@ class categoryCreation(APIView):
         return Response(serializers.data)
     
     
-    def post(request):
-        user = request.user
-        user = Category(user=user)
+    # def post(request):
+    #     user = request.user
+    #     user = Category(user=user)
 
-        serializer = CategorySerializer(user, data=request.data)
-        data = {}
-        if serializer.is_valid():
-            serializer.save()
-            data["success"] = "Post category created successfully!"
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     serializer = CategorySerializer(user, data=request.data)
+    #     data = {}
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         data["success"] = "Post category created successfully!"
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def post(self, request, format=None):
+        serializers = CategorySerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PostList(APIView):
