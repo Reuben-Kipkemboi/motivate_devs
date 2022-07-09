@@ -88,7 +88,7 @@ class PostList(APIView):
 
 
 class SinglePostList(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+    # parser_classes = (MultiPartParser, FormParser)
     # permission_classes = (IsAdminOrReadOnly,)
     def get_single_post(self, pk):
         try:
@@ -119,7 +119,6 @@ class SinglePostList(APIView):
 
 
 class PostComment(APIView):
-    # parser_classes = (MultiPartParser, FormParser)
     def get_single_post(self, pk):
         try:
             return Post.objects.get(pk=pk)
@@ -128,7 +127,7 @@ class PostComment(APIView):
 
     def get(self, request, pk, format=None):
         single_post = self.get_single_post(pk)
-        serializers = PostSerializer(single_post)
+        serializers = CommentSerializer(single_post)
         return Response(serializers.data)
 
         
@@ -140,7 +139,6 @@ class PostComment(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class PostChildComment(APIView): 
-    parser_classes = (MultiPartParser, FormParser) 
     def get_single_comment(self, pk):
             try:
                 return Comment.objects.get(pk=pk)
