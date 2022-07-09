@@ -26,7 +26,7 @@ class profile(APIView):
 
 class UpdateProfile(APIView):
     serializer_class = ProfileSerializer
-    parser_classes = (MultiPartParser, FormParser)
+    # parser_classes = (MultiPartParser, FormParser)
     lookup_field = 'email'
     profiles = Profile.objects.all()
 
@@ -69,7 +69,7 @@ class categoryCreation(APIView):
 
 
 class PostList(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+    # parser_classes = (MultiPartParser, FormParser)
     def get(self, request, format=None):
         # querying from the database(Posts table)
         posts = Post.objects.all()
@@ -119,7 +119,7 @@ class SinglePostList(APIView):
 
 
 class PostComment(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+    # parser_classes = (MultiPartParser, FormParser)
     def get_single_post(self, pk):
         try:
             return Post.objects.get(pk=pk)
