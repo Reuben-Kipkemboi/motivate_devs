@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from rest_framework import status, permissions
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.schemas import get_schema_view
+from rest_framework.parsers import FileUploadParser
 
 #views
 
