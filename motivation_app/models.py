@@ -131,11 +131,12 @@ class Post(models.Model):
         return self.description
 
 class Comment(models.Model):
+    post_id=models.ForeignKey(Post, on_delete= models.CASCADE,null=True, blank=True)
     comment= models.TextField(null=True, blank=True)
     # parent_comment= models.ForeignKey("self", null=True, blank=True,on_delete=models.CASCADE)
     date_posted=models.DateTimeField(auto_now_add=True)
     user_id=models.ForeignKey(User,on_delete=models.CASCADE, null=True )
-    post_id=models.ForeignKey(Post, on_delete= models.CASCADE,null=True, blank=True)
+    
     
     def save_comment(self):
         self.save()
