@@ -112,7 +112,7 @@ class Post(models.Model):
     description=models.TextField()
     date_posted=models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,blank=True)
-    comments = models.ManyToManyField('Comment', null=True,blank=True)
+    comments = models.ForeignKey('Comment',on_delete=models.CASCADE, null=True,blank=True)
     
     
     
