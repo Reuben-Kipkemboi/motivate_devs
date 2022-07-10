@@ -59,9 +59,9 @@ urlpatterns = [
     
     
     #Admin Urls
-    path('admin/post/<int:pk>/', views.SinglePostList.as_view(), name='singlepost'),
-    path('admin/add_users/', views.AddUser.as_view(), name='singlepost'),
-    path('admin/deactivate/', views.DeactivateUser.as_view(), name='deactivate'),
+    path('main/post/<int:pk>/', views.SinglePostList.as_view(), name='singlepost'),
+    path('main/add_users/', views.AddUser.as_view(), name='users'),
+    path('main/deactivate/', views.DeactivateUser.as_view(), name='deactivate'),
     
     #General apiendpoints
     
