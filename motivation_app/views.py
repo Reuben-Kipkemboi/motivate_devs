@@ -142,9 +142,9 @@ class PostComment(APIView):
         return Response(serializers.data)
 
         
-    def post(self, request, pk, format=None):
-        single_post = self.get_single_post(pk)
-        serializers = CommentSerializer(single_post,data=request.data)
+    def post(self, request, format=None):
+        # single_post = self.get_single_post(pk)
+        serializers = CommentSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
