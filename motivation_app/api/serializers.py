@@ -118,14 +118,15 @@ class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model=Comment
-        # fields = '__all__'
-        fields = (
-            'id',
-            'comment',
-            'date_posted',
-            'user_id',
-            'post_id'
-        )
+        fields = '__all__'
+        # fields = (
+        #     'id',
+        #      user''
+        #     'comment',
+        #     'date_posted',
+        #     'user_id',
+        #     'post_id'
+        # )
         
 class ChildCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

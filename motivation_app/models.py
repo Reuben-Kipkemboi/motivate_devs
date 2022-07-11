@@ -68,8 +68,8 @@ class Student(models.Model):
         return self.user.username
     
 
-def upload_path(instance, filename):
-    return '/'.join(['profile_pics', str(instance.title), filename])
+# def upload_path(instance, filename):
+#     return '/'.join(['profile_pics', str(instance.title), filename])
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
