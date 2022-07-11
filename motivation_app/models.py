@@ -107,12 +107,14 @@ class Category(models.Model):
         return self.type
 
 
-def upload_path(instance, filename):
-    return '/'.join(['content_images', str(instance.content_name), filename])
+# def upload_path(instance, filename):
+#     return '/'.join(['content_images', str(instance.content_name), filename])
+# def upload_to(instance, filename):
+#     return 'images/{filename}'.format(filename=filename)
 
 class Post(models.Model):
     content_name=models.CharField(max_length=100,null=True,blank=True)
-    content_image=models.ImageField(null=True,blank=True,upload_to='upload_path')
+    content_image=models.FileField(null=True,blank=True,upload_to='images_uploaded')
     video = models.FileField(null=True,blank=True,upload_to='videos_uploaded',
     validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
@@ -135,7 +137,7 @@ class Post(models.Model):
     
     
     def __str__(self):
-        return self.description
+        return self.content_name
 
 class Comment(models.Model):
     post_id=models.ForeignKey(Post, on_delete= models.CASCADE,null=True, blank=True)
