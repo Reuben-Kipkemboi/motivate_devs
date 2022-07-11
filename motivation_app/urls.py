@@ -37,7 +37,7 @@ urlpatterns = [
     path('staff/create_categories/',views.categoryCreation.as_view(), name="category"),
     path('staff/post/', views.PostList.as_view(), name='staffpostendpoint'),
     path('staff/post/<int:pk>', views.SinglePostList.as_view(), name='singlepost'),
-    path('comment-staff/post/<int:pk>', views.PostComment.as_view(), name='comment'),
+    path('comment-staff/post/', views.PostComment.as_view(), name='comment'),
     path('staff/post/comment/<int:pk>/comment/', views.PostChildComment.as_view(), name='comment'),
     path('posts/<int:pk>/like/',views.LikesView.as_view(),name = 'post_likes'),
     
