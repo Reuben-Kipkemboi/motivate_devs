@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Wishlist as WishlistModel
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.parsers import FileUploadParser
+from django.core import serializers as core_serializers
 
 # Application views.
 
@@ -79,12 +80,20 @@ class PostList(APIView):
 
     # permission_classes = (IsAdminOrReadOnly,)
 
+    # def post(self, request, format=None):
+    #     serializers = PostSerializer(data=request.data)
+    #     if serializers.is_valid():
+    #         serializers.save()
+    #         return Response(serializers.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     def post(self, request, format=None):
-        serializers = PostSerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        content_name=request.data['content_name']
+        content_image=request.data['content_image']
+        description=request.data['description']
+        category=request.data['category']
+        Post.objects.create(content_name=content_name, content_image=content_image,description=description,category=category)
+        return Response(status=status.HTTP_201_CREATED)
 
 
 class SinglePostList(APIView):

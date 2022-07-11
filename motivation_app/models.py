@@ -67,13 +67,16 @@ class Student(models.Model):
     def __str__(self):
         return self.user.username
     
-    
+
+def upload_path(instance, filename):
+    return '/'.join(['profile_pics', str(instance.title), filename])
+
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
     firstname=models.CharField(max_length=100,blank=True,null=True)
     lastname=models.CharField(max_length=100,blank=True,null=True)
     email=models.EmailField(max_length=100,blank=True,null=True)
-    profile_pic=models.ImageField(upload_to='images_uploaded', null=True)
+    profile_pic=models.ImageField(upload_to='upload_path', null=True)
     bio=models.TextField(blank=True,null=True)
     
     # def __str__(self):
@@ -103,9 +106,13 @@ class Category(models.Model):
     def __str__(self):
         return self.type
 
+
+def upload_path(instance, filename):
+    return '/'.join(['content_images', str(instance.content_name), filename])
+
 class Post(models.Model):
     content_name=models.CharField(max_length=100,null=True,blank=True)
-    content_image=models.ImageField(null=True,blank=True,upload_to='images_uploaded')
+    content_image=models.ImageField(null=True,blank=True,upload_to='upload_path')
     video = models.FileField(null=True,blank=True,upload_to='videos_uploaded',
     validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)

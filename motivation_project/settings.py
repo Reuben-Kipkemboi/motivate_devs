@@ -157,12 +157,12 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# configuring the location for media
-MEDIA_URL = '/media/'
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# configuring the location for media
+MEDIA_URL = '/media/'
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
