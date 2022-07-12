@@ -10,7 +10,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Software Development Students motivation app",
         default_version='v1',
-        description="Test description",
+        description="Software Development Students motivation app REST API",
         terms_of_service="https://www.sds.com/policies/terms/",
         contact=openapi.Contact(email="contact@sds.local"),
         license=openapi.License(name="BSD License"),
@@ -30,14 +30,15 @@ urlpatterns = [
          cache_timeout=0), name='schema-redoc'),
 
     #staff Urls
-    path('signup/staff/', StaffSignUpView.as_view()),
-    path('signup/student/', StudentSignUpView.as_view()),
+    # path('signup/staff/', StaffSignUpView.as_view()),
+    # path('signup/student/', StudentSignUpView.as_view()),
+    path('signup/',UserSignUp.as_view()),
     path('api/profile/', views.profile.as_view(),name='profile'),
     path('api/update_profile/', views.UpdateProfile.as_view(), name='profile_update'),
     path('staff/create_categories/',views.categoryCreation.as_view(), name="category"),
     path('staff/post/', views.PostList.as_view(), name='staffpostendpoint'),
     path('staff/post/<int:pk>', views.SinglePostList.as_view(), name='singlepost'),
-    path('comment-staff/post/', views.PostComment.as_view(), name='comment'),
+    path('comment-staff/post/<int:pk>', views.PostComment.as_view(), name='comment'),
     path('staff/post/comment/<int:pk>/comment/', views.PostChildComment.as_view(), name='comment'),
     path('posts/<int:pk>/like/',views.LikesView.as_view(),name = 'post_likes'),
     
@@ -52,11 +53,6 @@ urlpatterns = [
     path('student/wishlist/<int:pk>/', views.SingleWishlist.as_view(), name='studentwishlistendpoint'),
     path('student/post/<int:pk>/like/',views.LikesView.as_view(),name = 'post_likes'),
     path('student/post/<int:pk>/comment/', views.PostComment.as_view(), name='comment'),
-    
-    
-
-    
-    
     
     #Admin Urls
     path('main/post/<int:pk>/', views.SinglePostList.as_view(), name='singlepost'),

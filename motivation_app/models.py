@@ -13,13 +13,47 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
 
-class User(AbstractUser):
-    is_admin = models.BooleanField('Is admin', default=False)
-    is_staff = models.BooleanField('Is staff', default=False)
-    is_student = models.BooleanField('Is student', default=False)
+class Role(models.Model):
     
+    
+    name = models.CharField(
+        max_length=30, null=True
+    )
+    
+    def insert_roles(self):
+        roles = ["ADMIN", "STAFF", "STUDENT"]
+        for role in roles:
+            new_role = Role(name=role)
+            new_role.save()
+
     def __str__(self):
-        return self.username
+        return self.name
+
+
+
+class User(AbstractUser):
+    ADMIN=1
+    STAFF=2
+    STUDENT=3
+    
+    ROLES = (
+        (ADMIN, "Admin"),
+        (STAFF, "Staff"),
+        (STUDENT, "Student"),
+    )
+    
+    role = models.PositiveSmallIntegerField(choices=ROLES,null=True)
+
+    def __str__(self):
+        return f"{self.username} - {self.get_role_display()}"
+
+    # is_admin = models.BooleanField('Is admin', default=False)
+    # is_staff = models.BooleanField('Is staff', default=False)
+    # is_student = models.BooleanField('Is student', default=False)
+    
+    # def __str__(self):
+    #     return self.username
+    
     
     
 #using signals to create authentication token
@@ -27,6 +61,13 @@ class User(AbstractUser):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+        
+        
+ROLES = (
+    ('Admin', 'Admin'),
+    ('Staff', 'Staff'),
+    ('Student', 'Student'),
+)
         
 
 class Admin(models.Model):

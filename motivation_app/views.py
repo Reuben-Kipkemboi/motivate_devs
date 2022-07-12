@@ -353,3 +353,5 @@ class SingleWishlist(APIView):
 
 class AddUser(APIView):
     pass
+
+
